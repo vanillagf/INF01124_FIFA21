@@ -23,8 +23,17 @@ class Timer{
             streamsize ss = cout.precision();
             end = system_clock::now();
             duration = end-start;
-            cout << setprecision(2);
-            cout << title << " took " << duration.count() << " seconds" << endl << endl;
+            
+            if(duration.count() < 1){
+                cout.setf(ios::fixed);
+                cout << setprecision(0);
+                float ms = duration.count() *1000.0f;
+                cout << title << " took " << ms << " ms" << endl << endl;
+                cout.unsetf(ios_base::showbase);
+            }else{
+                cout << setprecision(2);
+                cout << title << " took " << duration.count() << " seconds" << endl << endl;
+            }
             cout << setprecision(ss);
         }      
 };
